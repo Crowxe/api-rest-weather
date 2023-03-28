@@ -16,17 +16,14 @@ import com.crow.clima.service.CurrentConditionsService;
 
 @RestController
 @RequestMapping("/regionCode")
-public class CurrentConditionController {
+public class CurrentConditionsController {
 
-	//cd Downloads/clima - add commit y push
-	
-	
 	@Autowired
 	private CurrentConditionsService service;
-	//Preguntar @PathVariable
-	 @GetMapping("/{regionCode}")
-	    public List<CurrentConditionsDTO> getCurrentConditions(@PathVariable String regionCode) {
-	        List<CurrentConditionsDTO> response = service.currentConditions(regionCode);
-	        return response;
-	    }
+
+	@GetMapping("/{regionCode}")
+	public List<CurrentConditionsDTO> getCurrentConditions(@PathVariable String regionCode) {
+		List<CurrentConditionsDTO> response = service.currentConditions(regionCode);
+		return response;
+	}
 }
