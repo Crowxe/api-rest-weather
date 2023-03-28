@@ -18,7 +18,8 @@ import com.crow.clima.service.CurrentConditionsService;
 @RequestMapping("/regionCode")
 public class CurrentConditionController {
 
-	//SSH Github para subir mi aplicacion
+	//cd Downloads/clima - add commit y push
+	
 	
 	@Autowired
 	private CurrentConditionsService service;
