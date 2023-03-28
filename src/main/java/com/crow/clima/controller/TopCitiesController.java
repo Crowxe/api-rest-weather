@@ -22,6 +22,10 @@ public class TopCitiesController {
 	@Autowired
 	TopCitiesService service;
 
+	
+	// AGREGAR BASE DE DATOS QUE GUARDE TOP CITIES ULTIMA ACTUALIZACION PARA CUANDO TIRA EL 503
+	
+	
     @GetMapping("/{group}")
     public List<TopCitiesDTO> getTopCities(@PathVariable String group) {
         List<TopCitiesDTO> response = service.currentTopCities(group);
