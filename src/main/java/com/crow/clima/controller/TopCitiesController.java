@@ -30,12 +30,12 @@ public class TopCitiesController {
 		List<TopCitiesDTO> response = service.currentTopCities(group);
 
 		for (TopCitiesDTO dto : response) {
-			TopCitiesEntity entity = new TopCitiesEntity();
-			entity.setLocalizedName(dto.getLocalizedName());
-			entity.setTemperatureUnit(dto.getTemperature().getMetric().getUnit());
-			entity.setTemperatureValue(dto.getTemperature().getMetric().getValue());
-			entity.setWeatherText(dto.getWeatherText());
-			service.saveTopCity(entity);
+			TopCitiesEntity topCitiesEntity = new TopCitiesEntity();
+			topCitiesEntity.setLocalizedName(dto.getLocalizedName());
+			topCitiesEntity.setTemperatureUnit(dto.getTemperature().getMetric().getUnit());
+			topCitiesEntity.setTemperatureValue(dto.getTemperature().getMetric().getValue());
+			topCitiesEntity.setWeatherText(dto.getWeatherText());
+			service.saveTopCity(topCitiesEntity);
 		}
 
 		return response;
