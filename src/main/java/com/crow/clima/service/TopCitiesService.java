@@ -36,7 +36,7 @@ public class TopCitiesService {
 
 	}
 
-	public void saveTopCity(TopCitiesEntity entity) {
+	public synchronized void saveTopCity(TopCitiesEntity entity) {
 		repository.save(entity);
 	}
 }
