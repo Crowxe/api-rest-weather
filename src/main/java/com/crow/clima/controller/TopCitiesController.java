@@ -3,34 +3,56 @@ package com.crow.clima.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.crow.clima.dtos.TopCitiesDTO;
+import com.crow.clima.entity.TopCitiesEntity;
 import com.crow.clima.service.TopCitiesService;
 
 //Spring Security
 
 @RestController
-@RequestMapping("/topcities")
+@RequestMapping("/topCities")
 public class TopCitiesController {
-	
+
 	@Autowired
 	TopCitiesService service;
 
-	
-	// AGREGAR BASE DE DATOS QUE GUARDE TOP CITIES ULTIMA ACTUALIZACION PARA CUANDO TIRA EL 503
-	
-	
-    @GetMapping("/{group}")
-    public List<TopCitiesDTO> getTopCities(@PathVariable String group) {
-        List<TopCitiesDTO> response = service.currentTopCities(group);
-        return response;
-    }
-	
-	
+	@GetMapping("/{group}")
+	public List<TopCitiesDTO> getTopCities(@PathVariable String group) {
+
+		List<TopCitiesDTO> response = service.currentTopCities(group);
+		
+		for(TopCitiesDTO dto : response) {
+			TopCitiesEntity entity = new TopCitiesEntity();
+			entity.setLocalizedName(dto.getLocalizedName());
+			entity.setTemperatureUnit(dto.getTemperature().getMetric().getUnit());
+			entity.setTemperatureValue(dto.getTemperature().getMetric().getValue());
+			entity.setWeatherText(dto.getWeatherText());
+			service.saveTopCity(entity);
+		}
+		
+		return response;
+	}
+
+	@PostMapping("/insertCity")
+	public ResponseEntity<String> crearUsuario(@RequestBody TopCitiesDTO topCitiesDTO) {
+
+		TopCitiesEntity topCitiesEntity = new TopCitiesEntity();
+		topCitiesEntity.setLocalizedName(topCitiesDTO.getLocalizedName());
+		topCitiesEntity.setWeatherText(topCitiesDTO.getWeatherText());
+		topCitiesEntity.setTemperatureUnit(topCitiesDTO.getTemperature().getMetric().getUnit());
+		topCitiesEntity.setTemperatureValue(topCitiesDTO.getTemperature().getMetric().getValue());
+		service.saveTopCity(topCitiesEntity);
+		return ResponseEntity.ok("El DTO se creó correctamente.");
+	}
+
 }
