@@ -48,7 +48,7 @@ public class TopCitiesController {
 		topCitiesEntity.setTemperatureUnit(topCitiesDTO.getTemperature().getMetric().getUnit());
 		topCitiesEntity.setTemperatureValue(topCitiesDTO.getTemperature().getMetric().getValue());
 		service.saveTopCity(topCitiesEntity);
-		return ResponseEntity.ok("El DTO se creó correctamente.");
+		return ResponseEntity.ok(topCitiesEntity.getLocalizedName()+" se creó correctamente.");
 	}
 
 }
