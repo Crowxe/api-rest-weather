@@ -17,8 +17,6 @@ import com.crow.clima.dtos.TopCitiesDTO;
 import com.crow.clima.entity.TopCitiesEntity;
 import com.crow.clima.service.TopCitiesService;
 
-//Spring Security
-
 @RestController
 @RequestMapping("/topCities")
 public class TopCitiesController {
@@ -30,8 +28,8 @@ public class TopCitiesController {
 	public List<TopCitiesDTO> getTopCities(@PathVariable String group) {
 
 		List<TopCitiesDTO> response = service.currentTopCities(group);
-		
-		for(TopCitiesDTO dto : response) {
+
+		for (TopCitiesDTO dto : response) {
 			TopCitiesEntity entity = new TopCitiesEntity();
 			entity.setLocalizedName(dto.getLocalizedName());
 			entity.setTemperatureUnit(dto.getTemperature().getMetric().getUnit());
@@ -39,7 +37,7 @@ public class TopCitiesController {
 			entity.setWeatherText(dto.getWeatherText());
 			service.saveTopCity(entity);
 		}
-		
+
 		return response;
 	}
 

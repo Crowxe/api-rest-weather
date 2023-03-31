@@ -16,8 +16,9 @@ public class TopCitiesDTO {
 		this.WeatherText = WeatherText;
 		this.Temperature = Temperature;
 	}
-	
-	public TopCitiesDTO() {}
+
+	public TopCitiesDTO() {
+	}
 
 	public String getLocalizedName() {
 		return LocalizedName;

@@ -10,28 +10,30 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "top_cities_entity")
 public class TopCitiesEntity {
-	
+
 	@Id
 	@Column(name = "localized_name")
-    private String localizedName;
+	private String localizedName;
 
-    @Column(name = "weather_text")
-    private String weatherText;
+	@Column(name = "weather_text")
+	private String weatherText;
 
-    @Column(name = "temperature_value")
-    private Double temperatureValue;
+	@Column(name = "temperature_value")
+	private Double temperatureValue;
 
-    @Column(name = "temperature_unit")
-    private String temperatureUnit;
-    
-    public TopCitiesEntity() {}
+	@Column(name = "temperature_unit")
+	private String temperatureUnit;
 
-    public TopCitiesEntity(String localizedName, String weatherText, Double temperatureMetricValue, String temperatureUnit) {
-        this.localizedName = localizedName;
-        this.weatherText = weatherText;
-        this.temperatureValue = temperatureMetricValue;
-        this.temperatureUnit = temperatureUnit;
-    }
+	public TopCitiesEntity() {
+	}
+
+	public TopCitiesEntity(String localizedName, String weatherText, Double temperatureMetricValue,
+			String temperatureUnit) {
+		this.localizedName = localizedName;
+		this.weatherText = weatherText;
+		this.temperatureValue = temperatureMetricValue;
+		this.temperatureUnit = temperatureUnit;
+	}
 
 	public String getLocalizedName() {
 		return localizedName;
