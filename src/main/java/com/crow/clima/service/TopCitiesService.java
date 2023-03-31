@@ -2,6 +2,7 @@ package com.crow.clima.service;
 
 import java.util.List;
 
+import org.apache.catalina.mapper.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
@@ -17,7 +18,7 @@ import com.crow.clima.repository.TopCitiesRepository;
 public class TopCitiesService {
 
 	@Autowired
-	TopCitiesRepository repository;
+	TopCitiesRepository repository;	
 
 	public TopCitiesService() {
 	}
@@ -36,7 +37,24 @@ public class TopCitiesService {
 
 	}
 
-	public synchronized void saveTopCity(TopCitiesEntity entity) {
+	public synchronized void saveTopCity(TopCitiesDTO dto) {		
+		TopCitiesEntity entity = new TopCitiesEntity();
+		entity.setLocalizedName(dto.getLocalizedName());
+		entity.setWeatherText(dto.getWeatherText());
+		entity.setTemperatureUnit(dto.getTemperature().getMetric().getUnit());
+		entity.setTemperatureValue(dto.getTemperature().getMetric().getValue());
 		repository.save(entity);
 	}
+	
+	public synchronized void saveTopCities(List<TopCitiesDTO> topCitiesDTO) {
+		for (TopCitiesDTO dto : topCitiesDTO) {
+			TopCitiesEntity topCitiesEntity = new TopCitiesEntity();
+			topCitiesEntity.setLocalizedName(dto.getLocalizedName());
+			topCitiesEntity.setTemperatureUnit(dto.getTemperature().getMetric().getUnit());
+			topCitiesEntity.setTemperatureValue(dto.getTemperature().getMetric().getValue());
+			topCitiesEntity.setWeatherText(dto.getWeatherText());
+			repository.save(topCitiesEntity);
+		}
+	}
+
 }

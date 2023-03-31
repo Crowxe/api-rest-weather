@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.crow.clima.dtos.TopCitiesDTO;
-import com.crow.clima.entity.TopCitiesEntity;
 import com.crow.clima.service.TopCitiesService;
 
 @RestController
@@ -27,28 +26,15 @@ public class TopCitiesController {
 
 		List<TopCitiesDTO> response = service.currentTopCities(group);
 
-		for (TopCitiesDTO dto : response) {
-			TopCitiesEntity topCitiesEntity = new TopCitiesEntity();
-			topCitiesEntity.setLocalizedName(dto.getLocalizedName());
-			topCitiesEntity.setTemperatureUnit(dto.getTemperature().getMetric().getUnit());
-			topCitiesEntity.setTemperatureValue(dto.getTemperature().getMetric().getValue());
-			topCitiesEntity.setWeatherText(dto.getWeatherText());
-			service.saveTopCity(topCitiesEntity);
-		}
+		service.saveTopCities(response);
 
 		return response;
 	}
 
 	@PostMapping("/insertCity")
 	public ResponseEntity<String> crearUsuario(@RequestBody TopCitiesDTO topCitiesDTO) {
-
-		TopCitiesEntity topCitiesEntity = new TopCitiesEntity();
-		topCitiesEntity.setLocalizedName(topCitiesDTO.getLocalizedName());
-		topCitiesEntity.setWeatherText(topCitiesDTO.getWeatherText());
-		topCitiesEntity.setTemperatureUnit(topCitiesDTO.getTemperature().getMetric().getUnit());
-		topCitiesEntity.setTemperatureValue(topCitiesDTO.getTemperature().getMetric().getValue());
-		service.saveTopCity(topCitiesEntity);
-		return ResponseEntity.ok(topCitiesEntity.getLocalizedName()+" se creó correctamente.");
+		service.saveTopCity(topCitiesDTO);
+		return ResponseEntity.ok(topCitiesDTO.getLocalizedName() + " se creó correctamente.");
 	}
 
 }
