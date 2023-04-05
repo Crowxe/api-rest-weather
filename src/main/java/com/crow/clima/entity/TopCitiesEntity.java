@@ -11,9 +11,6 @@ import javax.persistence.Table;
 @Table(name = "top_cities_entity")
 public class TopCitiesEntity {
 
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-
 	@Id
 	@Column(name = "localized_name")
 	private String localizedName;
@@ -36,14 +33,6 @@ public class TopCitiesEntity {
 		this.weatherText = weatherText;
 		this.temperatureValue = temperatureMetricValue;
 		this.temperatureUnit = temperatureUnit;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public String getLocalizedName() {

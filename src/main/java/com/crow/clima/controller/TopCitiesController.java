@@ -39,6 +39,13 @@ public class TopCitiesController {
 		return service.getAll();
 
 	}
+	
+	@GetMapping("/seeAllUpdated/{group}")
+	public List<TopCitiesEntity> getAllUpdated(@PathVariable String group) {
+		
+		return service.getAllUpdated(group);
+		
+	}
 
 	@PostMapping("/insertCity")
 	public ResponseEntity<String> createCity(@RequestBody TopCitiesDTO topCitiesDTO) {

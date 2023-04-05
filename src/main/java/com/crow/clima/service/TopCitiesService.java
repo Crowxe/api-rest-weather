@@ -1,6 +1,7 @@
 package com.crow.clima.service;
 
 import java.util.List;
+import java.util.ArrayList;
 
 import org.apache.catalina.mapper.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,6 +61,20 @@ public class TopCitiesService {
 	public List<TopCitiesEntity> getAll() {
 
 		return repository.findAll();
+	}
+
+	public List<TopCitiesEntity> getAllUpdated(String group) {
+		List<TopCitiesDTO> cities = this.currentTopCities(group);
+		List<TopCitiesEntity> topCitiesEntity = new ArrayList<>();
+		for(TopCitiesDTO dto : cities) {
+			TopCitiesEntity entity = new TopCitiesEntity();
+			entity.setLocalizedName(dto.getLocalizedName());
+			entity.setTemperatureUnit(dto.getTemperature().getMetric().getUnit());
+			entity.setTemperatureValue(dto.getTemperature().getMetric().getValue());
+			entity.setWeatherText(dto.getWeatherText());
+			topCitiesEntity.add(entity);
+		}
+		return topCitiesEntity;
 	}
 
 }
