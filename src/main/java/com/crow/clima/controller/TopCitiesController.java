@@ -9,9 +9,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.crow.clima.dtos.TopCitiesDTO;
+import com.crow.clima.entity.TopCitiesEntity;
 import com.crow.clima.service.TopCitiesService;
 
 @RestController
@@ -31,8 +33,15 @@ public class TopCitiesController {
 		return response;
 	}
 
+	@GetMapping("/seeAll")
+	public List<TopCitiesEntity> getAll() {
+
+		return service.getAll();
+
+	}
+
 	@PostMapping("/insertCity")
-	public ResponseEntity<String> crearUsuario(@RequestBody TopCitiesDTO topCitiesDTO) {
+	public ResponseEntity<String> createCity(@RequestBody TopCitiesDTO topCitiesDTO) {
 		service.saveTopCity(topCitiesDTO);
 		return ResponseEntity.ok(topCitiesDTO.getLocalizedName() + " se creó correctamente.");
 	}

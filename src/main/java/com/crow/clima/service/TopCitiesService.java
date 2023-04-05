@@ -18,7 +18,7 @@ import com.crow.clima.repository.TopCitiesRepository;
 public class TopCitiesService {
 
 	@Autowired
-	TopCitiesRepository repository;	
+	TopCitiesRepository repository;
 
 	public TopCitiesService() {
 	}
@@ -37,7 +37,7 @@ public class TopCitiesService {
 
 	}
 
-	public synchronized void saveTopCity(TopCitiesDTO dto) {		
+	public synchronized void saveTopCity(TopCitiesDTO dto) {
 		TopCitiesEntity entity = new TopCitiesEntity();
 		entity.setLocalizedName(dto.getLocalizedName());
 		entity.setWeatherText(dto.getWeatherText());
@@ -45,7 +45,7 @@ public class TopCitiesService {
 		entity.setTemperatureValue(dto.getTemperature().getMetric().getValue());
 		repository.save(entity);
 	}
-	
+
 	public synchronized void saveTopCities(List<TopCitiesDTO> topCitiesDTO) {
 		for (TopCitiesDTO dto : topCitiesDTO) {
 			TopCitiesEntity topCitiesEntity = new TopCitiesEntity();
@@ -55,6 +55,11 @@ public class TopCitiesService {
 			topCitiesEntity.setWeatherText(dto.getWeatherText());
 			repository.save(topCitiesEntity);
 		}
+	}
+
+	public List<TopCitiesEntity> getAll() {
+
+		return repository.findAll();
 	}
 
 }
