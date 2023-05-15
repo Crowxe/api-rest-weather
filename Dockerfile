@@ -11,8 +11,11 @@ WORKDIR /clima
 # Clonar el repositorio del proyecto
 RUN git clone https://github.com/Crowxe/api-rest-weather.git .
 
+# Otorgar permisos de ejecución al archivo 'mvnw'
+RUN chmod +x ./mvnw
+
 # Si usas Maven:
-RUN ./mvnw clean package
+RUN ./mvnw clean package -DskipTests
 
 # Crear la imagen final con la aplicación compilada
 FROM openjdk:11-jdk

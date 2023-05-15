@@ -9,9 +9,10 @@ services:
     depends_on:
       - db
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/postgres
+      SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5432/postgres
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: root
+    network_mode: host
 
   db:
     image: "postgres:14"
@@ -21,10 +22,10 @@ services:
       POSTGRES_PASSWORD: root
       POSTGRES_DB: postgres
     ports:
-      - "5433:5432"
+      - "5432:5432"
     volumes:
       - db-data:/var/lib/postgresql/data
+    network_mode: host
 
 volumes:
   db-data:
-
