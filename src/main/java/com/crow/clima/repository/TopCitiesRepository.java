@@ -10,6 +10,6 @@ public interface TopCitiesRepository extends JpaRepository<TopCitiesEntity, Stri
 
 	TopCitiesEntity findByLocalizedName(String localized_name);
 
-	List<TopCitiesEntity> findByLocalizedNameContaining(String search);
+	List<TopCitiesEntity> findByLocalizedNameContainingIgnoreCase(String search);
 
 }

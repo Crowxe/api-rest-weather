@@ -38,7 +38,7 @@ public class TopCitiesService {
 
 	}
 		public List<TopCitiesEntity> searchCities(String search) {
-			return repository.findByLocalizedNameContaining(search);
+			return repository.findByLocalizedNameContainingIgnoreCase(search);
 		}
 
 
