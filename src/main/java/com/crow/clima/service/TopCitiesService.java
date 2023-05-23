@@ -37,6 +37,10 @@ public class TopCitiesService {
 		return rates;
 
 	}
+		public List<TopCitiesEntity> searchCities(String search) {
+			return repository.findByLocalizedNameContaining(search);
+		}
+
 
 	public synchronized void saveTopCity(TopCitiesDTO dto) {
 		TopCitiesEntity entity = new TopCitiesEntity();
